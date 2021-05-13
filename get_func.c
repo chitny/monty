@@ -1,4 +1,4 @@
-#include "tetris.h"
+#include "monty.h"
 
 /**
  * get_func - selects the right function
