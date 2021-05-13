@@ -87,15 +87,24 @@ void nop(stack_t **stack, unsigned int nline)
 }
 
 /**
- * _isalpha - checks if int is in alphabet
- * @c: int
- * Return: 1 if yes, 0 if no
+ * addop - adds the top two elements together
+ * @stack: pointer to the head node pointer of stack
+ * @nline: the line number
+ * Return: Nothing.
  */
-int _isalpha(int c)
+void addop(stack_t **stack, unsigned int nline)
 {
-	if (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')))
-		return (1);
-	else
-		return (0);
-}
+	stack_t *temp;
 
+	if (!(*stack) || !(*stack)->next)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", nline);
+		exit(EXIT_FAILURE);
+	}
+
+	temp = *stack;
+	(*stack)->next->n += (*stack)->n;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	free(temp);
+}
